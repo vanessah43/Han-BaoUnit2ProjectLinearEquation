@@ -62,11 +62,20 @@ public class LinearEquation {
 
         /* finding slopes + constraints */
 
+        //if both are ints
+        if ((yDiff % 1 == 0) && (xDiff % 1 == 0)) {
+            yDiff = (int) yDiff;
+            xDiff = (int) xDiff;
+            // if one is negative
+            if ((xDiff < 0 && yDiff > 0 ) || (xDiff > 0 && yDiff < 0 )) {
+                slope = "-" + yDiff + "/" + xDiff;
+            }
+        }
         // if one value (x or y) in the slope is negative
         if ((xDiff < 0 && yDiff > 0 ) || (xDiff > 0 && yDiff < 0 )) {
             yDiff = Math.abs(yDiff);
             xDiff = Math.abs(xDiff);
-            slope = "-" + yDiff + "/" + xDiff;
+            slope = "-" + slope;
         }
         // if both values are negative
         if (xDiff < 0 && yDiff < 0) {
@@ -81,14 +90,6 @@ public class LinearEquation {
                 slope = "-" + (yDiff / xDiff);
             }
             slope = String.valueOf(yDiff / xDiff);
-        }
-        //if both are ints
-        if ((yDiff % 1 == 0) && (xDiff % 1 == 0)) {
-            slope = (int) yDiff + "/" + (int) xDiff;
-            // if one is negative
-            if ((xDiff < 0 && yDiff > 0 ) || (xDiff > 0 && yDiff < 0 )) {
-                slope = "-" + slope;
-            }
         }
 
         /* finding y-ints + constraints */
