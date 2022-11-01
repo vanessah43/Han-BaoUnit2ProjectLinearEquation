@@ -99,7 +99,7 @@ public class LinearEquation {
         /* finding y-ints + constraints */
         // if y int is negative
         if (yIntercept() < 0) {
-            yInt = "- " + String.valueOf(Math.abs(yIntercept()));
+            yInt = "- " + Math.abs(yIntercept());
         }
 
         // if y int is == 0
@@ -109,15 +109,15 @@ public class LinearEquation {
 
         // if y int is positive
         else if (yIntercept() > 0) {
-            yInt = "+ " + String.valueOf(yIntercept());
+            yInt = "+ " + yIntercept();
         }
 
         // constructing string
-        line = "y = " + slope + "x " + yInt;
+        line += slope + "x " + yInt;
 
         // if string is horizontal
         if (y1 == y2) {
-            line = "y = " + yInt;
+            line += yInt;
         }
 
         // final return statement
@@ -130,7 +130,7 @@ public class LinearEquation {
         double yValue = (xValue * slope() + yIntercept());
         yValue = roundedToHundredth(yValue);
         double roundedX = roundedToHundredth(xValue);
-        return "(" + xValue + ", " + yValue + ")";
+        return "(" + roundedX + ", " + yValue + ")";
     }
 
     //helper method, rounds to nearest hundredth
