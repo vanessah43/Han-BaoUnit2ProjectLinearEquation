@@ -1,11 +1,18 @@
 import java.util.Scanner;
 public class LinearEquationRunner {
+
+    static void start() {
+        // greeting user
+        System.out.println("Welcome!");
+
+    }
     public static void main(String[] args) {
         // scanner object
         Scanner scan = new Scanner(System.in);
 
-        // greeting user + asking for 2 coordinate pairs
-        System.out.print("Welcome! Please enter a coordinate pair in the form (x, y). \nBoth should be integers. ");
+        start();
+
+        System.out.print("Please enter a coordinate pair in the form (x, y). \nBoth should be integers. ");
         String pair1 = scan.nextLine();
         System.out.print("Enter your next pair. \nNote: x cannot be the same. ");
         String pair2 = scan.nextLine();
@@ -28,8 +35,8 @@ public class LinearEquationRunner {
         int intY2 = Integer.parseInt(y2);
 
         // in the case of a vertical line, exits program w/ 0 errors
-        if (x1 == x2) {
-            System.out.println("Please enter an accepted pair of values. You must have distinct x-values.");
+        if (x1.equals(x2)) {
+            System.out.println("These points are on a vertical line: x = " + x1);
             System.exit(0);
         }
 

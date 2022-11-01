@@ -6,8 +6,8 @@ public class LinearEquation {
     private int y1;
     private int x2;
     private int y2;
-    private double yDiff;
-    private double xDiff;
+    private int yDiff;
+    private int xDiff;
 
     // creates a LinearEquation object
         // precondition: x1 & x2 are NOT equal
@@ -34,15 +34,14 @@ public class LinearEquation {
     // calculates and returns the y-intercept of the line
     public double yIntercept() {
         // if one of the pairs is on the y-axis returns its y-value
-        if (x1 == 0) {
-            return roundedToHundredth(y1);
-        } else if (x2 == 0) {
-            return roundedToHundredth(y2);
-        }
+////        if (x1 == 0) {
+//            return roundedToHundredth(y1);
+//        } else if (x2 == 0) {
+//            return roundedToHundredth(y2);
+//        }
 
         // else
-        double slope = (yDiff / xDiff);
-        double b = y1 - (slope * x1);
+        double b = y1 - (slope() * x1);
         return roundedToHundredth(b);
     }
 
@@ -61,35 +60,40 @@ public class LinearEquation {
         String yInt = "+ " + yIntercept();
 
         /* finding slopes + constraints */
+//        // if one is negative
+//        if ((xDiff < 0 && yDiff > 0 ) || (xDiff > 0 && yDiff < 0 )) {
+//            slope = "-" + yDiff + "/" + xDiff;
+//            System.out.println("b");
+//        }
 
-        //if both are ints
-        if ((yDiff % 1 == 0) && (xDiff % 1 == 0)) {
-            yDiff = (int) yDiff;
-            xDiff = (int) xDiff;
-            // if one is negative
-            if ((xDiff < 0 && yDiff > 0 ) || (xDiff > 0 && yDiff < 0 )) {
-                slope = "-" + yDiff + "/" + xDiff;
-            }
-        }
         // if one value (x or y) in the slope is negative
-        if ((xDiff < 0 && yDiff > 0 ) || (xDiff > 0 && yDiff < 0 )) {
-            yDiff = Math.abs(yDiff);
-            xDiff = Math.abs(xDiff);
-            slope = "-" + slope;
+        if ((xDiff < 0) && (yDiff >= 0 ) || (xDiff > 0) && (yDiff <= 0 )) {
+            slope = "-" + Math.abs(yDiff) + "/" + Math.abs(xDiff);
         }
         // if both values are negative
-        if (xDiff < 0 && yDiff < 0) {
+        else if (xDiff < 0 && yDiff < 0) {
             yDiff = Math.abs(yDiff);
             xDiff = Math.abs(xDiff);
-            slope = "-" + yDiff + "/" + xDiff;
+            slope = yDiff + "/" + xDiff;
         }
         // if yDiff is divisible by xDiff
         if (yDiff % xDiff == 0) {
             // if one is negative
             if ((xDiff < 0 && yDiff > 0 ) || (xDiff > 0 && yDiff < 0 )) {
-                slope = "-" + (yDiff / xDiff);
+                slope = "-" + Math.abs(yDiff / xDiff);
+            } else {
+                slope = String.valueOf(yDiff / xDiff);
             }
-            slope = String.valueOf(yDiff / xDiff);
+        }
+
+        // if slope = 1 or -1
+        if (Math.abs(yDiff) == Math.abs(xDiff)) {
+            // if slope negative
+            if ((xDiff < 0 && yDiff > 0 ) || (xDiff > 0 && yDiff < 0 )) {
+                slope = "-";
+            } else {
+                slope = "";
+            }
         }
 
         /* finding y-ints + constraints */
@@ -99,12 +103,12 @@ public class LinearEquation {
         }
 
         // if y int is == 0
-        if (yIntercept() == 0) {
+        else if (yIntercept() == 0) {
             yInt = "";
         }
 
         // if y int is positive
-        if (yIntercept() > 0) {
+        else if (yIntercept() > 0) {
             yInt = "+ " + String.valueOf(yIntercept());
         }
 
